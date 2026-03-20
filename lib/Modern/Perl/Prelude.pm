@@ -12,7 +12,7 @@ use strict   ();
 use warnings ();
 use feature  ();
 use utf8     ();
-use Data::Dumper ();
+
 use Feature::Compat::Try ();
 use builtin::compat      ();
 
