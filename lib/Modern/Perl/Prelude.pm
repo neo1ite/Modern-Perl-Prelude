@@ -7,6 +7,7 @@ use warnings;
 # ABSTRACT: Project prelude for modern Perl style on Perl 5.30+
 our $VERSION = '0.006';
 
+
 use Import::Into ();
 use strict   ();
 use warnings ();
@@ -16,13 +17,13 @@ use utf8     ();
 use Feature::Compat::Try ();
 use builtin::compat      ();
 
-my @FEATURES = qw(
+use constant FEATURES => qw(
     say
     state
     fc
 );
 
-my @BUILTINS = qw(
+use constant BUILTINS => qw(
     blessed
     refaddr
     reftype
@@ -42,7 +43,7 @@ my %KNOWN_ARG = map { $_ => 1 } qw(
     -defer
 );
 
-sub import(\@@) {
+sub import {
     my ($class, @args) = @_;
     my $target = caller;
     my $style = _detect_call_style(\@args);
@@ -52,14 +53,14 @@ sub import(\@@) {
     strict->import::into($target);
     warnings->import::into($target);
     
-    my @features = $config->{features} ? @{$config->{features}} : @FEATURES;
+    my @features = $config->{features} ? @{$config->{features}} : FEATURES;
     feature->import::into($target, @features);
    
 	#TRY
     Feature::Compat::Try->import::into($target); 
 
     #builtins
-    my @builtins = $config->{builtins} ? @{$config->{builtins}} : @BUILTINS; 
+    my @builtins = $config->{builtins} ? @{$config->{builtins}} : BUILTINS; 
     builtin::compat->import::into($target, @builtins);
 
 #UTF8
@@ -70,6 +71,13 @@ sub import(\@@) {
 
     _import_optional_with_opts($target, 'Feature::Compat::Defer', $config->{defer})
 	if $config->{defer};
+	undef $config;
+	undef @features;
+	undef @builtins;
+	undef $class;
+	undef @args;
+	undef $target;
+
     	return;
 }
 
@@ -83,9 +91,16 @@ sub unimport {
     strict->unimport::out_of($target);
     warnings->unimport::out_of($target);
     
-    my @features = $config->{features} ? @{$config->{features}} : @FEATURES;
+    my @features = $config->{features} ? @{$config->{features}} : FEATURES;
     feature->unimport::out_of($target, @features);
     utf8->unimport::out_of($target);
+
+    undef $config;
+    undef @features;
+    undef $class;
+    undef @args;
+    undef $target;
+
 
     return;
 }
@@ -110,14 +125,14 @@ sub _detect_call_style {
     if (grep { !ref && !/^-/ } @$args){
     	return 'features';
 	}
-    
+	undef $args;
     #style 4 mixed for callback
     return 'mixed'; 
 }
 
 sub _parse_by_style {
 	my ($style, $args)  = @_;
-	my %config;
+	my %config = ();
 	if ($style eq 'hash'){
 		%config = %{$args->[0]};
 	}
@@ -148,6 +163,9 @@ sub _parse_by_style {
 			}
 		}
 	}
+	undef $style;
+	undef $args;
+	
 	return \%config;
 }
 
@@ -164,6 +182,9 @@ sub _import_optional_with_opts {
 	elsif ($opts) {
 		$module->import::into($target);
 	}
+	undef $target;
+	undef $module;
+	undef $opts;
 	return;
 }
 
