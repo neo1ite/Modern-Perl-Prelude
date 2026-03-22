@@ -41,6 +41,7 @@ my %KNOWN_ARG = map { $_ => 1 } qw(
     -utf8
     -class
     -defer
+    -corinna
 );
 
 sub import {
@@ -71,6 +72,9 @@ sub import {
 
     _import_optional_with_opts($target, 'Feature::Compat::Defer', $config->{defer})
 	if $config->{defer};
+    _import_optional_with_opts($target, 'Object::Pad', $config->{corinna})
+    	if $config->{corinna};
+
 	undef $config;
 	undef @features;
 	undef @builtins;
