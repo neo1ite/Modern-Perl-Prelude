@@ -68,10 +68,6 @@ it "should work with multiple corinna classes in same file" => sub {
         is($cat->speak, "The cat says meow!", "Another animal works");
     };
 it "should support inheritance with corinna" => sub {
-	#package Test::Employee;
-
-	#use Test2::V0;
-	#use Modern::Perl::Prelude '-corinna';
 
         class Test::Employee :isa(Test::Person) {
             field $title :param;
