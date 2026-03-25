@@ -1,6 +1,7 @@
 # Modern::Perl::Prelude
 
 [![CPAN version](https://badge.fury.io/pl/Modern-Perl-Prelude.svg)](https://metacpan.org/pod/Modern::Perl::Prelude)
+[![CPAN testers](https://cpants.cpanauthors.org/dist/Modern-Perl-Prelude.svg)](https://cpants.cpanauthors.org/dist/Modern-Perl-Prelude)
 [![License](https://img.shields.io/badge/license-Perl%205-blue.svg)](https://dev.perl.org/licenses/)
 [![Perl](https://img.shields.io/badge/perl-5.26%2B-blue.svg)](https://www.perl.org/)
 [![CI](https://github.com/neo1ite/Modern-Perl-Prelude/actions/workflows/ci.yml/badge.svg)](https://github.com/neo1ite/Modern-Perl-Prelude/actions/workflows/ci.yml)
