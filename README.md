@@ -1,5 +1,6 @@
 # Modern::Perl::Prelude
 
+[![MetaCPAN package](https://repology.org/badge/version-for-repo/metacpan/perl%3Amodern-perl-prelude.svg)](https://repology.org/project/perl%3Amodern-perl-prelude/versions)
 [![CPAN version](https://badge.fury.io/pl/Modern-Perl-Prelude.svg)](https://metacpan.org/pod/Modern::Perl::Prelude)
 [![CPAN testers](https://cpants.cpanauthors.org/dist/Modern-Perl-Prelude.svg)](https://cpants.cpanauthors.org/dist/Modern-Perl-Prelude)
 [![License](https://img.shields.io/badge/license-Perl%205-blue.svg)](https://dev.perl.org/licenses/)
